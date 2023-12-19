@@ -10,7 +10,7 @@
 #   - get artefact from https://github.com/spring108/artifactory.git
 #   - run service
 
-- name: [build] prepare infrastructure
+- name: group "build" - prepare infrastructure
   hosts: build
   become: yes
   tasks:
@@ -29,7 +29,7 @@
 
 
 
-- name: [build] make the artifact
+- name: group "build" - make the artifact
   hosts: build
   become: yes
   tasks:
@@ -54,7 +54,7 @@
       path: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
 
 
-- name: [build] upload artifact into ARTIFACTORY
+- name: group "build" - upload artifact into ARTIFACTORY
   hosts: build
   become: yes
   tasks:
@@ -80,7 +80,7 @@
 
 
 
-- name: [prod] prepare infrastructure
+- name: group "prod" - prepare infrastructure
   hosts: prod
   become: yes
   tasks:

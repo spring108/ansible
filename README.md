@@ -23,6 +23,7 @@
       - ssh-copy-id /root/.ssh/id_rsa.pub root@Slave1
       - ssh-copy-id /root/.ssh/id_rsa.pub root@Slave2
     - sudo apt update
+    - sudo apt install git -y
     - apt policy ansible
     - sudo apt install ansible -y
     - ansible --version #ansible 2.5.1
