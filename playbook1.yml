@@ -57,6 +57,10 @@
   hosts: build
   become: yes
   tasks:
+  - name: Delete repository folder for ARTIFACTORY
+    file:
+      path: /tmp/artifactory
+      state: absent
   - name: "Clone a github repository for ARTIFACTORY"
     git:
       repo: https://github.com/spring108/artifactory.git
@@ -84,19 +88,19 @@
   hosts: prod
   become: yes
   tasks:
-  - name: Ensure TOMCAT package is present
+  - name: group "prod" - Ensure TOMCAT package is present
     apt:
       name: tomcat9
       state: present
-  - name: Ensure GIT package is present
+  - name: group "prod" - Ensure GIT package is present
     apt:
       name: git
       state: present
-  - name: "Delete repository folder for ARTIFACTORY"
+  - name: group "prod" - Delete repository folder for ARTIFACTORY
     file:
       path: /tmp/artifactory
       state: absent
-  - name: "Clone a github repository for ARTIFACTORY"
+  - name: group "prod" - Clone a github repository for ARTIFACTORY
     git:
       repo: https://github.com/spring108/artifactory.git
       dest: /tmp/artifactory
