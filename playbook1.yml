@@ -109,5 +109,5 @@
   - name: Copy the artifact to webapps
     copy:
       src: /tmp/artifactory/hello.war
-      dest: /usr/local/tomcat/webapps/hello.war
+      dest: /var/lib/tomcat9/webapps/hello.war
       force: true
