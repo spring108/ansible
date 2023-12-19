@@ -1,0 +1,101 @@
+---
+# Ansible playbook
+# Home work #8 - Services WITHOUT Docker
+# 
+# VM Slave 1: group = build
+#   - make artefact by https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+#   - send artefact to https://github.com/spring108/artifactory.git
+# VM Slave 2: group = prod
+#   - install apache tomcat
+#   - get artefact from https://github.com/spring108/artifactory.git
+#   - run service
+
+- name: [build] prepare infrastructure
+  hosts: build
+  become: yes
+  tasks:
+  - name: Ensure GIT package is present
+    apt:
+      name: git
+      state: present
+  - name: Ensure JAVA package is present
+    apt:
+      name: default-jdk
+      state: present
+  - name: Ensure MAVEN package is present
+    apt:
+      name: maven
+      state: present
+
+
+
+- name: [build] make the artifact
+  hosts: build
+  become: yes
+  tasks:
+  - name: Clone a github repository for PROJECT
+    git:
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dst: /tmp
+      clone: yes
+      update: yes
+  - name: Clean the artifact
+    file:
+      path: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      state: absent
+  - name: Build the artifact
+    shell: cd /tmp/boxfuse-sample-java-war-hello && mvn package
+  - name: Check the artifact exists
+    file:
+      path: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      state: file
+  - name: Check the artifact exists 2
+    stat:
+      path: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+
+
+- name: [build] upload artifact into ARTIFACTORY
+  hosts: build
+  become: yes
+  tasks:
+  - name: Clone a github repository for ARTIFACTORY
+    git:
+      repo: https://github.com/spring108/artifactory.git
+      dst: /tmp
+      clone: yes
+      update: yes
+  - name: Copy the artifact to git dir
+    copy:
+      src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dst: /tmp/artifactory/hello.war
+      force: true
+#  - name: Push to ARTIFACTORY
+#    git:
+#      repo: https://github.com/spring108/artifactory.git
+#      dst: /tmp
+#      clone: yes
+#      update: yes
+
+
+
+
+
+- name: [prod] prepare infrastructure
+  hosts: prod
+  become: yes
+  tasks:
+  - name: Ensure TOMCAT package is present
+    apt:
+      name: tomcat9
+      state: present
+  - name: Clone a github repository for ARTIFACTORY
+    git:
+      repo: https://github.com/spring108/artifactory.git
+      dst: /tmp
+      clone: yes
+      update: yes
+  - name: Copy the artifact to webapps
+    copy:
+      src: /tmp/artifactory/hello.war
+      dst: /usr/local/tomcat/webapps/hello.war
+      force: true

@@ -30,4 +30,7 @@
     - cd /tmp
     - git clone https://github.com/spring108/ansible.git
     - cd /tmp/ansible
-
+    - cp ./hosts /etc/ansible
+    - ansible all -m ping
+    - ansible-playbook playbook1.yml # WITHOUT Docker
+    - ansible-playbook playbook2.yml # WITH    Docker
