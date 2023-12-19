@@ -35,7 +35,7 @@
   - name: "Clone GIT Repository for PROJECT"
     git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
-      dest: /tmp
+      dest: /tmp/boxfuse-sample-java-war-hello
       clone: yes
       update: yes
   - name: Clean the artifact
@@ -60,7 +60,7 @@
   - name: "Clone a github repository for ARTIFACTORY"
     git:
       repo: https://github.com/spring108/artifactory.git
-      dest: /tmp
+      dest: /tmp/artifactory
       clone: yes
       update: yes
   - name: Copy the artifact to git dir
@@ -90,7 +90,7 @@
   - name: Clone a github repository for ARTIFACTORY
     git:
       repo: https://github.com/spring108/artifactory.git
-      dest: /tmp
+      dest: /tmp/artifactory
       clone: yes
       update: yes
   - name: Copy the artifact to webapps
