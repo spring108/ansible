@@ -34,7 +34,7 @@
   become: yes
   tasks:
   - name: Clone a github repository for PROJECT
-    git:
+    ansible.builtin.git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
       dst: /tmp
       clone: yes
@@ -59,7 +59,7 @@
   become: yes
   tasks:
   - name: Clone a github repository for ARTIFACTORY
-    git:
+    ansible.builtin.git:
       repo: https://github.com/spring108/artifactory.git
       dst: /tmp
       clone: yes
