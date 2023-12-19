@@ -106,8 +106,10 @@
       dest: /tmp/artifactory
       clone: yes
       update: yes
-  - name: Copy the artifact to webapps
+  - name: group "prod" - Copy the artifact to webapps folder
     copy:
       src: /tmp/artifactory/hello.war
       dest: /var/lib/tomcat9/webapps/hello.war
       force: true
+      remote_src: yes
+
