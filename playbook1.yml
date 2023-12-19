@@ -88,7 +88,7 @@
   - name: GIT Push to ARTIFACTORY-2
     shell: cd /tmp/artifactory && git add . && git commit -m "artifact changet"
   - name: GIT Push to ARTIFACTORY-3
-    shell: cd /tmp/artifactory && git push 'spring108:{{ git_token }}@https://github.com/spring108/artifactory.git'
+    shell: cd /tmp/artifactory && git push https://spring108:{{ git_token }}@github.com/spring108/artifactory.git
 
 
 

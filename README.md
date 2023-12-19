@@ -33,6 +33,6 @@
     - cd /tmp/ansible
     - cp ./hosts /etc/ansible
     - ansible all -m ping
-    - ansible-playbook playbook1.yml # WITHOUT Docker
-    - ansible-playbook playbook2.yml # WITH    Docker
+    - ansible-playbook playbook1.yml --ask-vault-pass # WITHOUT Docker
+    - ansible-playbook playbook2.yml --ask-vault-pass # WITH    Docker
     - go to http://[Slave2_public_IP]:8080/hello/
