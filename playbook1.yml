@@ -33,7 +33,7 @@
   hosts: build
   become: yes
   tasks:
-  - name: Clone a github repository for PROJECT
+  - name: Clone GIT Repository
     ansible.builtin.git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
       dst: /tmp
