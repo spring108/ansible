@@ -26,13 +26,15 @@
     apt:
       name: maven
       state: present
+
+
 - name: group "build" - make the artifact
   hosts: build
   become: yes
   tasks:
   - name: Clone GIT Repository for PROJECT
     ansible.builtin.git:
-      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
       dst: /tmp
       clone: yes
       update: yes
