@@ -33,7 +33,7 @@
   become: yes
   tasks:
   - name: "Clone GIT Repository for PROJECT"
-    ansible.builtin.git:
+    git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
       dst: /tmp
       clone: yes
