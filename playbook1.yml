@@ -68,6 +68,7 @@
       src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
       dest: /tmp/artifactory/hello.war
       force: true
+      remote_src: yes
 #  - name: Push to ARTIFACTORY
 #    git:
 #      repo: https://github.com/spring108/artifactory.git
