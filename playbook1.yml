@@ -56,6 +56,16 @@
 - name: group "build" - upload artifact into ARTIFACTORY
   hosts: build
   become: yes
+  vars:
+    git_token: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          63633166316436376133373362663866343737643635303861303661663262633330393366646235
+          3061343736316362643763313436616637376138366335310a623035663663363134313764633032
+          32353234633066656666653833316435323139386330376466316234616534613566356462343935
+          6161613435346631390a306163336532396464383736326632653939633932653962393062356239
+          38386539316336643631646266353934623733633837313461353237643735353439343336326530
+          3530383439656438316435343836623035663732616363623561
+
   tasks:
   - name: Delete repository folder for ARTIFACTORY
     file:
@@ -78,7 +88,7 @@
   - name: GIT Push to ARTIFACTORY-2
     shell: cd /tmp/artifactory && git add . && git commit -m "artifact changet"
   - name: GIT Push to ARTIFACTORY-3
-    shell: cd /tmp/artifactory && git push 'spring108:qqq@https://github.com/spring108/artifactory.git'
+    shell: cd /tmp/artifactory && git push 'spring108:{{ git_token }}@https://github.com/spring108/artifactory.git'
 
 
 
