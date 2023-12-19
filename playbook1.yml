@@ -92,6 +92,10 @@
     apt:
       name: git
       state: present
+  - name: "Delete repository folder for ARTIFACTORY"
+    file:
+      path: /tmp/artifactory
+      state: absent
   - name: "Clone a github repository for ARTIFACTORY"
     git:
       repo: https://github.com/spring108/artifactory.git
