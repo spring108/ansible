@@ -73,14 +73,12 @@
       dest: /tmp/artifactory/hello.war
       force: true
       remote_src: yes
-#  - name: Push to ARTIFACTORY
-#    git:
-#      repo: https://github.com/spring108/artifactory.git
-#      dest: /tmp
-#      clone: yes
-#      update: yes
-
-
+  - name: GIT Push to ARTIFACTORY-1
+    shell: git config --global user.name "Igor Skripnikov" &&  git config --global user.email "garik108@narod.ru"
+  - name: GIT Push to ARTIFACTORY-2
+    shell: cd /tmp/artifactory && git add . && git commit -m "artifact changet"
+  - name: GIT Push to ARTIFACTORY-3
+    shell: cd /tmp/artifactory && git push 'spring108:qqq@https://github.com/spring108/artifactory.git'
 
 
 
@@ -96,6 +94,10 @@
     apt:
       name: git
       state: present
+- name: group "prod" - RUN Service
+  hosts: prod
+  become: yes
+  tasks:
   - name: group "prod" - Delete repository folder for ARTIFACTORY
     file:
       path: /tmp/artifactory

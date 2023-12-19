@@ -35,3 +35,4 @@
     - ansible all -m ping
     - ansible-playbook playbook1.yml # WITHOUT Docker
     - ansible-playbook playbook2.yml # WITH    Docker
+    - go to http://[Slave2_public_IP]:8080/hello/
