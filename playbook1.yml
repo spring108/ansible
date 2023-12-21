@@ -85,18 +85,18 @@
       remote_src: yes
   - name: GIT Push to ARTIFACTORY-1-1
     #shell: git config --global user.name "Igor Skripnikov" &&  git config --global user.email "garik108@narod.ru"
-    git:
+    git_config:
       name: user.name
       repo: /tmp/artifactory
       scope: global
-      value: Igor Skripnikov
+      value: 'Igor Skripnikov'
   - name: GIT Push to ARTIFACTORY-1-2
     #shell: git config --global user.name "Igor Skripnikov" &&  git config --global user.email "garik108@narod.ru"
-    git:
+    git_config:
       name: user.email
       repo: /tmp/artifactory
       scope: global
-      value: garik108@narod.ru
+      value: 'garik108@narod.ru'
   - name: GIT Push to ARTIFACTORY-2
     shell: cd /tmp/artifactory && git add . && git commit -m "artifact changet"
   - name: GIT Push to ARTIFACTORY-3
